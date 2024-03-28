@@ -13,6 +13,30 @@ public:
     int longestKSubstr(string s, int k)
     {
         // your code here
+        int l = 0, r = 0, cnt = 0;
+        vector<int> v;
+        int n = s.size();
+        int fre[26] = {0};
+        while (r < n)
+        {
+            fre[s[r] - 'a']++;
+            if (fre[s[r] - 'a'] == 1)
+                cnt++;
+            if (cnt == k)
+                v.push_back(r - l + 1);
+            if (cnt > k)
+            {
+                fre[s[l] - 'a']--;
+                if (fre[s[l] - 'a'] == 0)
+                    cnt--;
+                l++;
+            }
+            r++;
+        }
+        if (v.empty())
+            return -1;
+        else
+            return v[v.size() - 1];
     }
 };
 
@@ -32,4 +56,4 @@ int main()
     }
 }
 
-// } Driver Code Ends
+/
